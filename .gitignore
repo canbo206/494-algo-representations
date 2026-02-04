@@ -1,1 +1,11 @@
-.DS_Store*.tsv
+# Data files
+*.tsv
+*.zip
+data/
+*.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
