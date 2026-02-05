@@ -1,24 +1,15 @@
-# Data files
+# system
+.DS_Store
+
+# data files
+*.csv
 *.tsv
-*.zip
+
+# data folder
 data/
-*.DS_Store
 
-# Python
-__pycache__/
-*.pyc
-venv/
-.venv/
+# env
+.env
 
-# Virtual environments
-cn_venv/
-venv/
-env/
-.venv/
-communitynotes/scoring/cn_env/
-
-# Data files
-*.tsv
-*.zip
-data/
-communitynotes/data/
+# outputs
+outputs/
