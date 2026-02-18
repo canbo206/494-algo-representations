@@ -29,3 +29,23 @@ from scoring.runner import main
 if __name__ == "__main__":
   logging.basicConfig(level=logging.DEBUG)
   main()
+
+
+"""If there is only one rating file, pass the file path to the --ratings flag.
+  # python3 communitynotes/scoring/src/main.py \
+  --enrollment mf_inputs/topic_news_and_social_concern/userEnrollment-00000.tsv \
+  --notes mf_inputs/topic_news_and_social_concern/notes-00000.tsv \
+  --ratings mf_inputs/topic_news_and_social_concern/ratings-00000.tsv \
+  --status mf_inputs/topic_news_and_social_concern/noteStatusHistory-00000.tsv \
+  --outdir topic_outputs/topic_news_and_social_concern
+"""
+
+"""Warning: No scored notes available for author helpfulness calculation
+Warning: No author counts - returning empty helpfulness scores
+Warning: No helpfulness scores - returning all ratings
+Warning: No scored notes available for author helpfulness calculation
+Warning: No author counts - returning empty helpfulness scores
+Warning: No helpfulness scores - returning all ratings
+Warning: NaN loss detected in diligence model training - skipping this round
+Warning: NaN loss detected in diligence model training - skipping this round
+"""

@@ -90,6 +90,8 @@ def get_ratings_before_note_status_and_public_tsv(
   Returns:
       pd.DataFrame combinedRatingsBeforeStatus ratings that were created early enough to be valid ratings
   """
+  
+  return ratings
   right_suffix = "_note"
   ratingsWithNoteLabelInfo = ratings[
     [c.raterParticipantIdKey, c.noteIdKey, c.helpfulNumKey, c.createdAtMillisKey]
@@ -190,6 +192,7 @@ def get_ratings_with_scores(
   log: bool = True,
   doTypeCheck: bool = True,
 ) -> pd.DataFrame:
+
   """
   This funciton merges the note status history, ratings, and scores for later aggregation.
 

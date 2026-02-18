@@ -1341,6 +1341,13 @@ def run_prescoring(
       c.postSelectionValueKey,
     },
   )
+
+  # save to a tsv/csv file
+  # prescoringNoteModelOutput
+  # prescoringRaterModelOutput
+  prescoringNoteModelOutput.to_csv("prescoringNoteModelOutput.tsv", sep="\t", index=False)
+  prescoringRaterModelOutput.to_csv("prescoringRaterModelOutput.tsv", sep="\t", index=False) 
+
   with c.time_block("Logging Prescoring Results RAM usage (after concatenation)"):
     logger.info(get_df_info(prescoringRaterModelOutput, "prescoringRaterModelOutput"))
 
@@ -2107,6 +2114,7 @@ def run_scoring(
     checkFlips=False,
     previousRatingCutoffTimestampMillis=previousRatingCutoffTimestampMillis,
   )
+  # Skip prescoring for topic MF runs
 
   logger.info("We invoked run_scoring and are now in between prescoring and scoring.")
   if writePrescoringScoringOutputCallback is not None:
@@ -2136,4 +2144,6 @@ def run_scoring(
   # scoredNotes, newNoteStatusHistory, auxiliaryNoteInfo, _ = run_final_note_scoring(...)
   # logger.info("Starting contributor scoring")
   # helpfulnessScores = run_contributor_scoring(...)
-  # return scoredNotes, helpfulnessScores, newNoteStatusHistory, auxiliaryNoteInfo
+  # return prescoringScoredNotes, None, noteStatusHistory, None
+
+   

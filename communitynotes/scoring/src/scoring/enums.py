@@ -6,16 +6,16 @@ class Scorers(Enum):
   """Exhaustive list of all scorers to simplify setting enabled/disabled scorers."""
 
   MFCoreScorer = auto()
-  MFCoreWithTopicsScorer = auto()
-  MFExpansionScorer = auto()
-  # Note that the MFGroupScorer value controls whether *all* group scorers are instantiated,
-  # not just a single MFGroupScorer instance.
-  MFGroupScorer = auto()
-  MFExpansionPlusScorer = auto()
-  ReputationScorer = auto()
-  MFTopicScorer = auto()
-  MFMultiGroupScorer = auto()
-  GaussianScorer = auto()
+  # MFCoreWithTopicsScorer = auto()
+  # MFExpansionScorer = auto()
+  # # Note that the MFGroupScorer value controls whether *all* group scorers are instantiated,
+  # # not just a single MFGroupScorer instance.
+  # MFGroupScorer = auto()
+  # MFExpansionPlusScorer = auto()
+  # ReputationScorer = auto()
+  # MFTopicScorer = auto()
+  # MFMultiGroupScorer = auto()
+  # GaussianScorer = auto()
 
 
 class Topics(Enum):

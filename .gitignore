@@ -3,6 +3,13 @@
 *.zip
 data/
 *.DS_Store
+*.parquet
+mf_inputs/
+topic_outputs/
+topic_mf_outputs/
+quick_outputs/
+simple_outputs/
+communitynotes/scoring/src/data/
 
 # Python
 __pycache__/

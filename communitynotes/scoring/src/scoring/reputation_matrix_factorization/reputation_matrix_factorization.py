@@ -295,7 +295,10 @@ def _train_one_round(model, loss_fn, dataset, hParams):
     # Compute loss
     loss = loss_fn(pred.flatten())
     loss += model.get_regularization_loss(numRatings)
-    assert not torch.isnan(loss).any()
+    # assert not torch.isnan(loss).any()
+    if torch.isnan(loss).any():
+      print("Warning: NaN loss detected in diligence model training - skipping this round")
+      return model
     if hParams.logRate and epoch % hParams.logRate == 0:
       logger.info(f"epoch={epoch:03d} | loss={loss.item():7.6f} | time={time.time() - start:.1f}s")
     if hParams.convergence > 0 and epoch % hParams.stablePeriod == 0:

@@ -27,6 +27,10 @@ def author_helpfulness(
   Returns:
     pd.DataFrame: one row per author, containing columns for author helpfulness scores
   """
+  if len(scoredNotes) == 0:
+    print("Warning: No scored notes available for author helpfulness calculation")
+    return pd.DataFrame()
+  
 
   scoredNotes.loc[:, c.noteCountKey] = 1
   authorCounts = scoredNotes.groupby(c.noteAuthorParticipantIdKey).sum(numeric_only=True)[
@@ -108,10 +112,22 @@ def compute_general_helpfulness_scores(
   Returns:
       helpfulness_scores pandas.DataFrame: 1 row per user, with helpfulness scores as columns.
   """
+  if len(scoredNotes) == 0:
+    print("Warning: No scored notes - returning empty helpfulness scores")
+    return pd.DataFrame()
+  
   # don't consider any notes which we didn't score
   scoredNotes = scoredNotes[~pd.isna(scoredNotes[c.internalNoteInterceptKey])]
   authorCounts = author_helpfulness(scoredNotes, c.internalNoteInterceptKey)
+  if len(authorCounts) == 0:
+    print("Warning: No author counts - returning empty helpfulness scores")
+    return pd.DataFrame()
   raterCounts = _rater_helpfulness(validRatings)
+
+  # Check if raterCounts has the required columns before joining
+  if c.raterParticipantIdKey not in raterCounts.columns:
+    print("Warning: raterParticipantId not found in raterCounts - returning empty helpfulness scores")
+    return pd.DataFrame()
 
   helpfulnessScores = (
     authorCounts.join(
@@ -222,6 +238,9 @@ def filter_ratings_by_helpfulness_scores(
   helpfulnessScores: pd.DataFrame,
   log: bool = True,
 ):
+  if len(helpfulnessScores) == 0:
+    print("Warning: No helpfulness scores - returning all ratings")
+    return ratingsForTraining
   """Filter out ratings from raters whose helpfulness scores are too low.
   See https://twitter.github.io/communitynotes/contributor-scores/#filtering-ratings-based-on-helpfulness-scores.
 

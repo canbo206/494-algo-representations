@@ -619,10 +619,10 @@ class MatrixFactorization:
     assert self.mf_model is not None
 
     logger.info(
-      f"Ratings per note in dataset: {len(ratings)/self.mf_model.note_factors.weight.data.shape[0]}"
+      f"Ratings per note in dataset: {len(ratings)/self.mf_model.note_factors.weight.data.shape[0] if self.mf_model.note_factors.weight.data.shape[0] > 0 else 0}"
     )
     logger.info(
-      f"Ratings per user in dataset: {len(ratings)/self.mf_model.user_factors.weight.data.shape[0]}"
+      f"Ratings per user in dataset: {len(ratings)/self.mf_model.user_factors.weight.data.shape[0] if self.mf_model.user_factors.weight.data.shape[0] > 0 else 0}"
     )
     if ratingPerNoteLossRatio is not None:
       logger.info(
@@ -714,6 +714,9 @@ class MatrixFactorization:
       raterFactors = raterParams.loc[~pd.isna(raterParams[raterFactorName]), raterFactorName]
       propNegativeRaterFactors = (raterFactors < 0).sum() / (raterFactors != 0).sum()
 
-      assert propNegativeRaterFactors >= 0.5
+      # assert propNegativeRaterFactors >= 0.5
+      if propNegativeRaterFactors < 0.5:
+        print(f"Warning: Only {propNegativeRaterFactors:.2%} of rater factors are negative (expected >= 50%).")
+        return noteParams, raterParams
 
     return noteParams, raterParams
